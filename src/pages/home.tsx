@@ -15,7 +15,7 @@ import { Link, RichTextEditor } from "@mantine/tiptap";
 import Placeholder from "@tiptap/extension-placeholder";
 import Superscript from "@tiptap/extension-superscript";
 
-// import { trpc } from "../utils/trpc";
+import { trpc } from "../utils/trpc";
 
 const schema = z.object({
   title: z.string().min(2, { message: "Title should have at least 2 letters" }),
@@ -66,9 +66,12 @@ const Home: NextPage = () => {
     },
   });
 
-  const onSubmit = form.onSubmit((values) => console.log({ values }));
+  const noteMutation = trpc.note.store.useMutation();
+  const onSubmit = form.onSubmit((values) => {
+    noteMutation.mutate(values);
+  });
 
-  // const hello = trpc.example.hello.useQuery({ text: "from tRPC" });
+  console.log({ noteMutation });
 
   return (
     <div className="mx-auto my-10 h-full max-w-4xl px-2">
