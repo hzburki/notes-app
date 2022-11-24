@@ -71,8 +71,6 @@ const Home: NextPage = () => {
     noteMutation.mutate(values);
   });
 
-  console.log({ noteMutation });
-
   return (
     <div className="mx-auto my-10 h-full max-w-4xl px-2">
       <Title order={1} className="text-gray-600">
