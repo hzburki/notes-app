@@ -1,3 +1,5 @@
-@tailwind base;
+/** Commented tailwind base styles */
+/*! @tailwind base; */
+
 @tailwind components;
 @tailwind utilities;

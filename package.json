@@ -10,8 +10,25 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/server": "^11.10.0",
+    "@mantine/core": "^5.8.3",
+    "@mantine/form": "^5.8.3",
+    "@mantine/hooks": "^5.8.3",
+    "@mantine/next": "^5.8.3",
+    "@mantine/tiptap": "^5.8.3",
     "@prisma/client": "^4.5.0",
+    "@tabler/icons": "^1.113.0",
     "@tanstack/react-query": "^4.16.0",
+    "@tiptap/extension-highlight": "^2.0.0-beta.202",
+    "@tiptap/extension-link": "^2.0.0-beta.202",
+    "@tiptap/extension-placeholder": "^2.0.0-beta.202",
+    "@tiptap/extension-subscript": "^2.0.0-beta.202",
+    "@tiptap/extension-superscript": "^2.0.0-beta.202",
+    "@tiptap/extension-text-align": "^2.0.0-beta.202",
+    "@tiptap/extension-underline": "^2.0.0-beta.202",
+    "@tiptap/react": "^2.0.0-beta.202",
+    "@tiptap/starter-kit": "^2.0.0-beta.202",
     "@trpc/client": "^10.0.0",
     "@trpc/next": "^10.0.0",
     "@trpc/react-query": "^10.0.0",
@@ -20,7 +37,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "superjson": "1.9.1",
-    "zod": "^3.18.0"
+    "zod": "^3.19.1"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
