@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { type NextPage } from "next";
+import { cva } from "class-variance-authority";
 import { useForm, zodResolver } from "@mantine/form";
 import { TextInput, Title, Text, Button } from "@mantine/core";
 
@@ -41,30 +42,42 @@ const Home: NextPage = () => {
       Highlight,
       StarterKit,
       Superscript,
-      Placeholder.configure({ placeholder: "Required" }),
+      Placeholder.configure({
+        placeholder: "Required",
+      }),
       TextAlign.configure({ types: ["heading", "paragraph"] }),
     ],
+    editorProps: {
+      attributes: {
+        class: "min-h-[300px]",
+      },
+    },
     content: form.values.content,
     onUpdate: ({ editor }) => {
-      form.setFieldValue("content", editor.getHTML());
-      console.log({ value: editor.getHTML() });
+      form.setFieldValue("content", editor.isEmpty ? "" : editor.getHTML());
     },
   });
+
+  const editorStyle = cva("", {
+    variants: {
+      error: {
+        true: "border-red-500",
+      },
+    },
+  });
+
+  const onSubmit = form.onSubmit((values) => console.log({ values }));
 
   // const hello = trpc.example.hello.useQuery({ text: "from tRPC" });
 
   return (
-    <div className="mx-auto my-10 h-full max-w-4xl">
+    <div className="mx-auto my-10 h-full max-w-4xl px-2">
       <Title order={1} className="text-gray-600">
         Add Note
       </Title>
 
       {/* Add Note Form */}
-      <form
-        onSubmit={form.onSubmit((values) =>
-          console.log({ values, isValid: form.isValid(), form })
-        )}
-      >
+      <form onSubmit={onSubmit}>
         <TextInput
           label="Title"
           error={form.errors?.title}
@@ -75,7 +88,10 @@ const Home: NextPage = () => {
 
         <div className="my-2">
           <Text fz="sm">Note</Text>
-          <RichTextEditor editor={editor}>
+          <RichTextEditor
+            className={editorStyle({ error: !!form.errors?.content })}
+            editor={editor}
+          >
             {/* Toolbar */}
             <RichTextEditor.Toolbar sticky stickyOffset={60}>
               <RichTextEditor.ControlsGroup>
@@ -115,6 +131,10 @@ const Home: NextPage = () => {
             {/* Content */}
             <RichTextEditor.Content />
           </RichTextEditor>
+
+          <Text fz="xs" className="my-1 text-red-500">
+            {form.errors?.content}
+          </Text>
         </div>
 
         <Button type="submit">Save</Button>
